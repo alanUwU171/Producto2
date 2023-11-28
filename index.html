@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="manifest" href="manifest.json">
     <style>
         #splash-screen {
             display: flex;
@@ -63,6 +64,17 @@
     </style>
     <script src="jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(function(registration) {
+                    console.log('Service Worker registrado con éxito:', registration);
+                })
+                .catch(function(error) {
+                    console.error('Error al registrar el Service Worker:', error);
+                });
+        }
+    </script>
 </head>
 <body>
     <div class="center-content">
@@ -102,7 +114,7 @@
                         <h2>Alumno</h2>
                     </div>
                     <div class="slider-item">
-                        <img src="PWA.png" alt="Slide 3">
+                        <img src="pwa.png" alt="Slide 3">
                         <h2>PWA</h2>
                     </div>
                 </div>
@@ -179,36 +191,36 @@
 
         // Funciones para cambiar el contenido al hacer clic en los botones (sin cambios)
         function cambiar1() {
-            $.get("demo.html", function(dato, estado) {
+            $.get("demo.php", function(dato, estado) {
                 $('#contenido').html(dato);
             });
         }
         function cambiar2() {
-            $.get("demo2.html", function(dato, estado) {
+            $.get("demo2.php", function(dato, estado) {
                 $('#contenido').html(dato);
             });
         }
 
         function cambiar3() {
-            $.get("demo3.html", function(dato, estado) {
+            $.get("demo3.php", function(dato, estado) {
                 $('#contenido').html(dato);
             });
         }
 
         function cambiar4() {
-            $.get("demo10.html", function(dato, estado) {
+            $.get("demo10.php", function(dato, estado) {
                 $('#contenido').html(dato);
             });
         }
 
         function cambiar5() {
-            $.get("demo5.html", function(dato, estado) {
+            $.get("demo5.php", function(dato, estado) {
                 $('#contenido').html(dato);
             });
         }
 
         function cambiar6() {
-            $.get("demo6.html", function(dato, estado) {
+            $.get("demo6.php", function(dato, estado) {
                 $('#contenido').html(dato);
             });
         }
