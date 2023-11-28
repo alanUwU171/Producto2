@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparativa de Aplicaciones</title>
+    <!-- Agrega enlaces a Bootstrap CSS y jQuery (para Bootstrap) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body backg>
+    <div class="container mt-5">
+        <h1 class="text-center">Alan Manuel Martinez Valdez</h1>
+        <h1 class="text-center">UTP0147022</h1>
+        <h1 class="text-center">PWA</h1>
+        <h1 class="text-center">MTRO: Javier Nolasco Hernandez</h1>
+        <h1 class="text-center">10 "B"</h1>
+        <h1 class="text-center">Ingenieria en Desarrollo de software</h1>
+       <img src="utp.png" alt="">
+    </div>
+</body>
+</html>

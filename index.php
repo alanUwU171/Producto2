@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTP01407022</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        #splash-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #7BE749;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            animation: fadeIn 1s ease-out;
+        }
+
+        #captured-image {
+            display: none;
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        
+        #splash-screen h1 {
+            font-size: 10em;
+            margin-bottom: 20px;
+        }
+
+        #splash-screen p {
+            font-size: 4em;
+            text-align: center;
+        }
+
+        /* Estilos del slider */
+        .slider-container {
+            width: 80%;
+            margin: auto;
+        }
+
+        .slider-item img {
+            width: 45%; /* Ajusta el ancho según tus necesidades */
+            border-radius: 8px;
+        }
+
+        /* Centrar contenido */
+        .center-content {
+            text-align: center;
+        }
+    </style>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+<body>
+    <div class="center-content">
+        <button type="submit" id="boton2" class="boton-bonito">Portada</button>
+        <button type="submit" id="boton1" class="boton-bonito">Justificación de las plataformas y herramientas utilizadas.</button>
+        <button type="submit" id="boton4" class="boton-bonito">Parámetros de configuración de las plataformas y herramientas utilizadas.</button>
+        <button type="submit" id="boton6" class="boton-bonito">Reporte de pruebas.</button>
+        <button type="submit" id="boton5" class="boton-bonito">Vínculo (URL) de la aplicación publicada.</button>
+        <button type="submit" id="boton3" class="boton-bonito">Referencias</button>
+        <button type="submit" id="boton7" class="boton-bonito">Tomar Foto</button>
+    </div>
+    <div id="contenido">
+        <!-- Contenido del splash screen -->
+        <div id="splash-screen">
+        <img id="captured-image" alt="Captured Image">
+        </div>
+    </div>
+    
+    <script>
+        // Función para cargar la página de inicio con sliders y datos locales
+        function cargarPaginaInicio() {
+            // Datos locales (puedes utilizar localStorage o IndexedDB para datos más complejos)
+            const datosLocales = {
+                titulo: "Bienvenido",
+                descripcion: "Esta es la descripción de la página de inicio."
+            };
+
+            // Renderizar el contenido
+            $('#contenido').html(`
+                <div class="slider-container">
+                    <div class="slider-item">
+                        <img src="utp.png" alt="Slide 1">
+                        <h2>Universidad</h2>
+                    </div>
+                    <div class="slider-item">
+                        <img src="yo.jpg" alt="Slide 2">
+                        <h2>Alumno</h2>
+                    </div>
+                    <div class="slider-item">
+                        <img src="pwa.png" alt="Slide 3">
+                        <h2>PWA</h2>
+                    </div>
+                </div>
+                <h1>${datosLocales.titulo}</h1>
+                <p>${datosLocales.descripcion}</p>
+            `);
+
+            // Inicializar el slider después de cargar el contenido
+            $('.slider-container').slick({
+                dots: true,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                arrows: false
+            });
+
+            // Mostrar notificación
+            if ('Notification' in window && Notification.permission !== 'denied') {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === 'granted') {
+                        var notification = new Notification('Bienvenido', {
+                            body: 'Gracias por visitar nuestra página.',
+                            icon: 'alerta.png' // Reemplaza con la ruta correcta a tu icono de notificación
+                        });
+                    }
+                });
+            }
+            // Evento para tomar una foto
+            $('#boton7').click(tomarFoto);
+        }
+
+        function tomarFoto() {
+            // Verificar si el navegador es compatible con getUserMedia
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                // Solicitar permiso para acceder a la cámara
+                navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+                    // Mostrar la imagen capturada en un elemento de imagen
+                    $('#captured-image').show();
+                    $('#captured-image').attr('src', URL.createObjectURL(stream));
+
+                    // Detener la transmisión de la cámara después de 3 segundos
+                    setTimeout(function () {
+                        stream.getTracks().forEach(track => track.stop());
+                        $('#captured-image').hide();
+                    }, 3000);
+                }).catch(function (error) {
+                    console.error('Error al acceder a la cámara:', error);
+                });
+            } else {
+                console.error('getUserMedia no es compatible con este navegador.');
+            }
+        }
+
+        // Función para cargar la página de splash
+        function cargarPaginaSplash() {
+            $('#contenido').html(`
+                <div id="splash-screen">
+                    <h1>Hola...</h1>
+                    <p>Bienvenido a mi producto final de PWA, espere un momento en lo que carga la pagina</p>
+                </div>
+            `);
+
+            // Cambiar a la página de inicio después de 3 segundos (3000 milisegundos)
+            setTimeout(cargarPaginaInicio, 3000);
+        }
+
+        // Asignar eventos a los botones (sin cambios)
+        $('#boton1').click(cambiar1);
+        $('#boton2').click(cambiar2);
+        $('#boton').click(cargarPaginaSplash);
+        $('#boton3').click(cambiar3);
+        $('#boton4').click(cambiar4);
+        $('#boton5').click(cambiar5);
+        $('#boton6').click(cambiar6);
+
+        // Funciones para cambiar el contenido al hacer clic en los botones (sin cambios)
+        function cambiar1() {
+            $.get("demo.php", function(dato, estado) {
+                $('#contenido').html(dato);
+            });
+        }
+        function cambiar2() {
+            $.get("demo2.php", function(dato, estado) {
+                $('#contenido').html(dato);
+            });
+        }
+
+        function cambiar3() {
+            $.get("demo3.php", function(dato, estado) {
+                $('#contenido').html(dato);
+            });
+        }
+
+        function cambiar4() {
+            $.get("demo10.php", function(dato, estado) {
+                $('#contenido').html(dato);
+            });
+        }
+
+        function cambiar5() {
+            $.get("demo5.php", function(dato, estado) {
+                $('#contenido').html(dato);
+            });
+        }
+
+        function cambiar6() {
+            $.get("demo6.php", function(dato, estado) {
+                $('#contenido').html(dato);
+            });
+        }
+
+        // Llamar a cargarPaginaSplash al cargar el documento
+        $(document).ready(function() {
+            cargarPaginaSplash();
+        });
+    </script>
+</body>
+</html>

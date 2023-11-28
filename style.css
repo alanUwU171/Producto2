@@ -1,0 +1,28 @@
+body{
+    background-image: url(fondo.jpg);
+    color: #FFFFFF;
+    align-items: center;
+    background-size: cover; /* Ajusta la imagen al tamaño de la ventana */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-attachment: fixed; /* Fija el fondo en su lugar mientras se desplaza la página */
+}
+.boton-bonito {
+    background-color: #a04caf; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 12px 24px; /* Espaciado interior (ajusta según tus necesidades) */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor:cell; /* Cambia el cursor al pasar el mouse */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+}
+
+/* Estilo para el botón al pasar el cursor */
+.boton-bonito:hover {
+    background-color: #ff0000; /* Cambia el color de fondo al pasar el cursor */
+    transform: translateY(10px); /* Eleva ligeramente el botón */
+}
+.pass {
+    color: green;
+    font-weight: bold;
+}
